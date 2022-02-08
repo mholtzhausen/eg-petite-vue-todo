@@ -73,7 +73,7 @@
                 this.save()
             },
             get source(){
-                return document.body.innerHTML
+                return document.documentElement.innerHTML
             },
             remove(taskIndex) {
                 console.log(`removing task ${taskIndex}`)
