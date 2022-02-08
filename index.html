@@ -46,6 +46,14 @@
                 </div>
             </div>
         </div>
+        <div class="card mt-3" v-show="showSource">
+            <div class="card-body">
+                <h5 class="card-title">Source Code</h5>
+                <div class="card-text">
+                    <pre>{{source}}</pre>
+                </div>
+            </div>
+        </div>
 
     </div>
     <script type="module">
@@ -53,7 +61,8 @@
         const storage = localStorage
 
         createApp({
-            showStructure: true,
+            showStructure: false,
+            showSource: true,
             todos: [{ name: 'some task', done: true }],
             addTask(e) {
                 this.todos.push({
@@ -62,6 +71,9 @@
                 })
                 this.clear()
                 this.save()
+            },
+            get source(){
+                return document.body.innerHTML
             },
             remove(taskIndex) {
                 console.log(`removing task ${taskIndex}`)
