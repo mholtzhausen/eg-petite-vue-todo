@@ -73,8 +73,10 @@
             },
             load() {
                 try {
-                    this.todos = sessionStorage.getItem('todoList')
-                } catch (e) { }
+                    this.todos = JSON.parse(sessionStorage.getItem('todoList'))
+                } catch (e) {
+                    console.log(`Load failed with:`,e)
+                 }
             },
             mounted() {
                 this.load()
