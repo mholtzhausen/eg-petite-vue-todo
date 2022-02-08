@@ -73,7 +73,7 @@
             },
             load() {
                 try {
-                    this.todos = JSON.parse(sessionStorage.getItem('todoList'))
+                    this.todos = JSON.parse(sessionStorage.getItem('todoList')) || []
                 } catch (e) {
                     console.log(`Load failed with:`,e)
                  }
