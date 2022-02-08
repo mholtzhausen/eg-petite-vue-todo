@@ -29,7 +29,7 @@
                       <li class="list-group-item">
                         <div v-for="(todo,idx) in todos" class="form-check">
                           <input type="checkbox" class="form-check-input" :id="`chk_${idx}`" :checked="todo.done" @change="todo.done = $event.srcElement.checked; save()" />
-                          <label class="form-check-label" :for="`chk_${idx}`"><span class="d-inline-block ms-2 me-2">[<a class="link-primary" href="Javascript:;" @click="remove(idx)">delete</a>]</span>{{todo.name}}</label>
+                          <label class="form-check-label" :for="`chk_${idx}`"><span class="d-inline-block ms-2 me-2">[<a class="link-primary" href="Javascript:;" @click="removeTask(idx)">delete</a>]</span>{{todo.name}}</label>
                         </div>
                       </li>
                     </ul>
