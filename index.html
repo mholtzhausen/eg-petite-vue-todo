@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card mt-5">
+            <h3 class="card-header bg-light">Todo List</h3>
+            <div class="card-body">
+                <div class="card-text">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <form @submit.prevent="addTask">
+                                <input ref="newTask" type="text"><button class="btn btn-primary btn-sm ml-2"
+                                    type="submit">+</button>
+                            </form>
+
+                        </li>
+                        <li class="list-group-item">
+                            <ul class="list-group list-group-flush">
+                                <li v-for="(todo,idx) in todos" class="list-group-item">
+                                    [<a href="Javascript:;" @click="remove(idx)">x</a>]
+                                    <input type="checkbox" v-model="todo.done" /> {{todo.name}}
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="card mt-3" v-show="showStructure">
+            <div class="card-body">
+                <h5 class="card-title">Data Structure</h5>
+                <div class="card-text">
+                    <pre>{{todos}}</pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/petite-vue?module'
+
+        createApp({
+            showStructure: false,
+            todos: [{ name: 'some task', done: true }],
+            addTask(e) {
+                this.todos.push({
+                    name: this.$refs.newTask.value,
+                    done: false
+                })
+                this.clear()
+                this.save()
+            },
+            remove(taskIndex) {
+                console.log(`removing task ${taskIndex}`)
+                this.todos.splice(taskIndex, 1)
+                this.save()
+            },
+            save() {
+                sessionStorage.setItem('todoList', JSON.stringify(this.todos))
+                console.log('saved List')
+            },
+            load() {
+                try {
+                    this.todos = sessionStorage.getItem('todoList')
+                } catch (e) { }
+            },
+            mounted() {
+                this.load()
+            },
+            unmounted() {
+                this.save()
+            },
+            clear() {
+                let newTask = this.$refs.newTask
+                newTask.value = ''
+                newTask.focus()
+            }
+        }).mount()
+    </script>
+
+</body>
+
+</html>
