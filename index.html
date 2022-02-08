@@ -27,7 +27,7 @@
                             <ul class="list-group list-group-flush">
                                 <li v-for="(todo,idx) in todos" class="list-group-item">
                                     [<a href="Javascript:;" @click="remove(idx)">x</a>]
-                                    <input type="checkbox" :checked="todo.done" @click="todo.none =  $event.srcElement.checked; save()" /> {{todo.name}}
+                                    <input type="checkbox" :checked="todo.done" @click="todo.done =  $event.srcElement.checked; save()" /> {{todo.name}}
                                 </li>
                             </ul>
                         </li>
