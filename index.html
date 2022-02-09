@@ -82,10 +82,11 @@
     </div>
     <script type="module">
         const source = document.documentElement.outerHTML
+        let storage
 
         import { createApp } from 'https://unpkg.com/petite-vue?module'
         try {
-            const storage = localStorage
+            storage = localStorage
         } catch (e) {
             console.log('localStorage not available in this context')
         }
